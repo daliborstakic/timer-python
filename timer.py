@@ -71,6 +71,10 @@ def update_time(total_seconds):
     minutes_ = total_seconds // 60
     seconds_ = total_seconds % 60
 
+    # Set the color to red
+    if total_seconds < 10:
+        time_label["fg"] = "Red"
+
     # String representation
     if seconds_ < 10:
         _time = f"{minutes_}:0{seconds_}"
