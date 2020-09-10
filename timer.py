@@ -7,15 +7,21 @@ root = tk.Tk()
 root.title("Timer")
 
 # First row
+minutes_var = tk.StringVar()
+minutes_var.set("0")
+
 minutes_label = Label(root, text="Minutes:")
-minutes_entry = Entry(root)
+minutes_entry = Entry(root, textvariable=minutes_var)
 
 minutes_label.grid(row=0, column=0, padx=5, pady=5)
 minutes_entry.grid(row=0, column=1, pady=5, padx=5)
 
 # Second row
+seconds_var = tk.StringVar()
+seconds_var.set("0")
+
 seconds_label = Label(root, text="Seconds:")
-seconds_entry = Entry(root)
+seconds_entry = Entry(root, textvariable=seconds_var)
 
 seconds_label.grid(row=1, column=0, padx=5, pady=5)
 seconds_entry.grid(row=1, column=1, pady=5, padx=5)
@@ -29,7 +35,7 @@ def show_message(_message):
 
 def start_timer():
     """ Gets the total amount of seconds """
-    if seconds_entry.get() == "" and minutes_entry.get() == "":
+    if seconds_entry.get() == "0" and minutes_entry.get() == "0":
         show_message("You haven't entered the time!")
     else:
         try:
@@ -56,8 +62,8 @@ def start_timer():
 
 def clear_entry():
     """ Clears entry widgets """
-    minutes_entry.delete(0, "end")
-    seconds_entry.delete(0, "end")
+    minutes_var.set("0")
+    seconds_var.set("0")
 
 def update_time(total_seconds):
     """ Updates time """
@@ -76,6 +82,10 @@ def update_time(total_seconds):
     if total_seconds >= 0:
         total_seconds -= 1
         root.after(1000, lambda: update_time(total_seconds))
+    else:
+        time_label.grid_remove()
+        clear_entry()
+        messagebox.showinfo("Update", "The timer has ran out.")
 
 # Third row
 start_button = Button(root, text="Start", command=start_timer)
