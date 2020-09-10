@@ -55,6 +55,7 @@ def start_timer():
         update_time(total_seconds)
 
 def clear_entry():
+    """ Clears entry widgets """
     minutes_entry.delete(0, "end")
     seconds_entry.delete(0, "end")
 
