@@ -13,4 +13,5 @@ Maybe the ability to stop the timer at any given moment. Also the abiliity to no
 * Visual Studio Code
 
 ### References
-* None
+* [GeeksForGeeks article](https://www.geeksforgeeks.org/create-countdown-timer-using-python-tkinter/)
+* [Stack Overflow question](https://stackoverflow.com/questions/34029223/basic-tkinter-countdown-timer)
