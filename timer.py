@@ -1,7 +1,5 @@
-from functools import total_ordering
 import tkinter as tk
 """ Showing message windows """
-from tkinter.messagebox import showerror
 from tkinter import Button, Entry, Label, messagebox
 
 # Main window
