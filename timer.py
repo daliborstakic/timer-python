@@ -37,18 +37,28 @@ def start_timer():
         try:
             minutes = int(minutes_entry.get())
             seconds = int(seconds_entry.get())
-        except TypeError:
+        except ValueError:
             show_message("You haven't entered a number!")
+            clear_entry()
             return
         
-        time_label.grid(row=2, columnspan=2, padx=5, pady=5)
-
-        minutes = int(minutes_entry.get())
+        minutes = int(minutes_entry.get())  
         seconds = int(seconds_entry.get())
 
         total_seconds = minutes * 60 + seconds
 
+        if seconds > 60:
+            show_message("Seconds cannot be larger than 60!")
+            clear_entry()
+            return
+
+        time_label.grid(row=2, columnspan=2, padx=5, pady=5)
+
         update_time(total_seconds)
+
+def clear_entry():
+    minutes_entry.delete(0, "end")
+    seconds_entry.delete(0, "end")
 
 def update_time(total_seconds):
     """ Updates time """
@@ -57,7 +67,11 @@ def update_time(total_seconds):
     seconds_ = total_seconds % 60
 
     # String representation
-    _time = f"{minutes_}:{seconds_}"
+    if seconds_ < 10:
+        _time = f"{minutes_}:0{seconds_}"
+    else:
+        _time = f"{minutes_}:{seconds_}"
+
     time_label.configure(text=_time)
 
     if total_seconds >= 0:
